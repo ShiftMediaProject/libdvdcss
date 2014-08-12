@@ -119,6 +119,10 @@
 #   include <limits.h>
 #endif
 
+#if defined(_WIN32_IE) && _WIN32_IE >= 0x500
+#   include <shlobj.h>
+#endif
+
 #include "dvdcss/dvdcss.h"
 
 #include "common.h"
@@ -131,18 +135,6 @@
 #include <direct.h>
 #define mkdir(a, b) _mkdir(a)
 #endif
-
-/**
- * \brief Symbol for version checks.
- *
- * The name of this symbol contains the library major number, which makes it
- * easy to check which \e libdvdcss development headers are installed on the
- * system with tools such as autoconf.
- *
- * The variable itself contains the exact version number of the library,
- * which can be useful for specific feature needs.
- */
-char * dvdcss_interface_2 = VERSION;
 
 /**
  * \brief Open a DVD device or directory and return a dvdcss instance.
@@ -238,46 +230,15 @@ LIBDVDCSS_EXPORT dvdcss_t dvdcss_open ( char *psz_target )
      */
     if( psz_cache == NULL || psz_cache[0] == '\0' )
     {
-#if defined(_WIN32_IE) && _WIN32_IE >= 0x401
-        typedef HRESULT( WINAPI *SHGETFOLDERPATH )
-                       ( HWND, int, HANDLE, DWORD, LPTSTR );
-
-#   define CSIDL_FLAG_CREATE 0x8000
-#   define CSIDL_APPDATA 0x1A
-#   define SHGFP_TYPE_CURRENT 0
-
+#if defined(_WIN32_IE) && _WIN32_IE >= 0x500
         char psz_home[MAX_PATH];
-        HINSTANCE p_dll;
-        SHGETFOLDERPATH p_getpath;
-
-        *psz_home = '\0';
-
-        /* Load the shfolder DLL to retrieve SHGetFolderPath */
-        p_dll = LoadLibrary( "shfolder.dll" );
-        if( p_dll )
-        {
-            p_getpath = (void*)GetProcAddress( p_dll, "SHGetFolderPathA" );
-            if( p_getpath )
-            {
-                /* Get the "Application Data" folder for the current user */
-                if( p_getpath( NULL, CSIDL_APPDATA | CSIDL_FLAG_CREATE,
-                               NULL, SHGFP_TYPE_CURRENT, psz_home ) == S_OK )
-                {
-                    FreeLibrary( p_dll );
-                }
-                else
-                {
-                    *psz_home = '\0';
-                }
-            }
-            FreeLibrary( p_dll );
-        }
 
         /* Cache our keys in
          * C:\Documents and Settings\$USER\Application Data\dvdcss\ */
-        if( *psz_home )
+        if (SHGetFolderPathA (NULL, CSIDL_APPDATA | CSIDL_FLAG_CREATE,
+                              NULL, SHGFP_TYPE_CURRENT, psz_home ) == S_OK)
         {
-            snprintf( psz_buffer, PATH_MAX, "%s/dvdcss", psz_home );
+            snprintf( psz_buffer, PATH_MAX, "%s\\dvdcss", psz_home );
             psz_buffer[PATH_MAX-1] = '\0';
             psz_cache = psz_buffer;
         }
@@ -416,7 +377,12 @@ LIBDVDCSS_EXPORT dvdcss_t dvdcss_open ( char *psz_target )
         i_fd = open( psz_tagfile, O_RDWR|O_CREAT, 0644 );
         if( i_fd >= 0 )
         {
-            write( i_fd, psz_tag, strlen(psz_tag) );
+            size_t len = strlen(psz_tag);
+            if( write( i_fd, psz_tag, len ) < (long)len )
+            {
+                print_error( dvdcss,
+                             "Error writing cache directory tag, continuing..\n" );
+            }
             close( i_fd );
         }
     }
@@ -598,8 +564,7 @@ LIBDVDCSS_EXPORT char * dvdcss_error ( dvdcss_t dvdcss )
  * This flag is typically used when reading data from a VOB.
  *
  * If #DVDCSS_SEEK_KEY is specified, the title key will be always checked,
- * even with the "title" method. This is equivalent to using the now
- * deprecated dvdcss_title() call. This flag is typically used when seeking
+ * even with the "title" method. This flag is typically used when seeking
  * in a new title.
  */
 LIBDVDCSS_EXPORT int dvdcss_seek ( dvdcss_t dvdcss, int i_blocks, int i_flags )
@@ -798,15 +763,6 @@ LIBDVDCSS_EXPORT int dvdcss_close ( dvdcss_t dvdcss )
     free( dvdcss );
 
     return 0;
-}
-
-/*
- *  Deprecated. See dvdcss_seek().
- */
-#undef dvdcss_title
-LIBDVDCSS_EXPORT int dvdcss_title ( dvdcss_t dvdcss, int i_block )
-{
-    return _dvdcss_title( dvdcss, i_block );
 }
 
 /**

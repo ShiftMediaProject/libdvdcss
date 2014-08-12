@@ -1,4 +1,4 @@
-AC_INIT(libdvdcss, 1.2.13)
+AC_INIT(libdvdcss, 1.3.0)
 AC_CONFIG_SRCDIR([src/libdvdcss.c])
 
 AC_PREREQ(2.50)
@@ -106,16 +106,17 @@ case x"${host_os}" in
     ;;
   x*cygwin*)
     CFLAGS="${CFLAGS} -mwin32"
+    AC_DEFINE([_WIN32_IE], 0x0500, [Define to '0x0500' for IE 5.0 (and shell) APIs.])
     ;;
   xos2*)
     LDFLAGS="-Zbin-files"
     ;;
   x*msvc*)
     SYS_MSVC=1
-    AC_DEFINE([_WIN32_IE], 0x0401, [Define to '0x0401' for IE 4.01 (and shell) APIs.])
+    AC_DEFINE([_WIN32_IE], 0x0500, [Define to '0x0500' for IE 5.0 (and shell) APIs.])
     ;;
   x*mingw* | *wince* | *mingwce*)
-    AC_DEFINE([_WIN32_IE], 0x0401, [Define to '0x0401' for IE 4.01 (and shell) APIs.])
+    AC_DEFINE([_WIN32_IE], 0x0500, [Define to '0x0500' for IE 5.0 (and shell) APIs.])
     ;;
   x*)
     ;;
@@ -174,7 +175,7 @@ AC_CHECK_HEADERS(sys/ioctl.h,[
   dnl Solaris: sys/scsi/scsi_types.h, sys/scsi/impl/uscsi.h
   dnl
   solaris_uscsi=yes
-  AC_CHECK_HEADERS([sys/scsi/scsi_types.h, sys/scsi/impl/uscsi.h], [],
+  AC_CHECK_HEADERS([sys/scsi/scsi_types.h sys/scsi/impl/uscsi.h], [],
     [solaris_uscsi=no; break;])
   AS_IF([test "$solaris_uscsi" = "yes"], [
     AC_DEFINE(SOLARIS_USCSI, 1, Have userspace SCSI headers.)
@@ -212,7 +213,7 @@ AC_CHECK_HEADERS(sys/ioctl.h,[
   fi
 ])
 
-CC_CHECK_CFLAGS_APPEND([-Wall -Wsign-compare])
+CC_CHECK_CFLAGS_APPEND([-Wall -Wsign-compare -Wextra])
 CC_FLAG_VISIBILITY([
   CC_ATTRIBUTE_VISIBILITY([default], [
     CFLAGS="${CFLAGS} -fvisibility=hidden"
@@ -222,12 +223,14 @@ CC_FLAG_VISIBILITY([
 AM_CONDITIONAL(SYS_MSVC, test "${SYS_MSVC}" = "1")
 
 AC_ARG_ENABLE([doc],
-  AS_HELP_STRING([--disable-apidoc], [Disable building (with Doxygen) and intalling API documentation @<:@default=auto@:@>]))
+  AS_HELP_STRING([--disable-doc], [Disable building (with Doxygen) and intalling API documentation @<:@default=auto@:@>]))
 
-AC_PATH_PROG([DOXYGEN], [doxygen])
+AS_IF([test "x$enable_doc" != "xno"], [
+  AC_PATH_PROG([DOXYGEN], [doxygen])
+])
 
 AS_IF([test "x$DOXYGEN" = "x"], [
-  AS_IF([test "x$enable_apidoc" = "xyes"], [
+  AS_IF([test "x$enable_doc" = "xyes"], [
     AC_MSG_ERROR([You need Doxygen to build API documentation])
   ])
 ])

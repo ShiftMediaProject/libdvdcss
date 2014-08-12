@@ -65,11 +65,6 @@ typedef struct dvdcss_s* dvdcss_t;
 #define LIBDVDCSS_EXPORT extern
 #endif
 
-/*
- * Our version number. The variable name contains the interface version.
- */
-LIBDVDCSS_EXPORT char *        dvdcss_interface_2;
-
 
 /*
  * Exported prototypes.
@@ -90,16 +85,6 @@ LIBDVDCSS_EXPORT int      dvdcss_readv ( dvdcss_t,
 LIBDVDCSS_EXPORT char *   dvdcss_error ( dvdcss_t );
 
 LIBDVDCSS_EXPORT int      dvdcss_is_scrambled ( dvdcss_t );
-
-
-/*
- * Deprecated stuff.
- */
-#ifndef _DOXYGEN_SKIP_ME
-#define dvdcss_title(a,b) dvdcss_seek(a,b,DVDCSS_SEEK_KEY)
-#define dvdcss_handle dvdcss_t
-#endif
-
 
 #ifdef __cplusplus
 }
