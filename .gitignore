@@ -30,3 +30,11 @@
 /src/.dirstamp
 /src/libdvdcss.pc
 compile
+
+*.obj
+*.log
+*.tlog
+*.pdb
+*.ildb
+*.suo
+*.sdf
