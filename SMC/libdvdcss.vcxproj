@@ -61,7 +61,7 @@
     <ClCompile Include="..\src\libdvdcss.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2016A4DB-B9BA-4521-BDA7-0EB3806E1FC8}</ProjectGuid>
+    <ProjectGuid>{7C88BA5D-096F-4D9D-AC8C-20BA49A9CE33}</ProjectGuid>
     <RootNamespace>libdvdcss</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
