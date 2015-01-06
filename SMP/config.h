@@ -104,27 +104,8 @@
 /* Define if <sys/scsi.h> defines sctl_io. */
 /* #undef HPUX_SCTL_IO */
 
-/* Define to the sub-directory in which libtool stores uninstalled libraries.
-   */
-#define LT_OBJDIR ".libs/"
-
 /* Define O_BINARY if missing */
 /* #undef O_BINARY */
-
-/* Name of package */
-#define PACKAGE "libdvdcss"
-
-/* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT ""
-
-/* Define to the full name of this package. */
-#define PACKAGE_NAME "libdvdcss"
-
-/* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME "libdvdcss"
-
-/* Define to the home page for this package. */
-#define PACKAGE_URL ""
 
 /* Have userspace SCSI headers. */
 /* #undef SOLARIS_USCSI */
@@ -140,30 +121,16 @@
 /* Define this if the compiler supports the -fvisibility flag */
 /* #undef SUPPORT_FLAG_VISIBILITY */
 
-#include "version.h"
+#ifdef _M_IX86
+/* Define to '0x0501' for IE 5.01. */
+#define _WIN32_IE 0x0501
 
-/* Enable large inode numbers on Mac OS X 10.5.  */
-#ifndef _DARWIN_USE_64_BIT_INODE
-# define _DARWIN_USE_64_BIT_INODE 1
+/* Define to '0x0500' for Windows XP APIs. */
+#define _WIN32_WINNT 0x0501
+#else
+/* Define to '0x0600' for IE 6.0. */
+#define _WIN32_IE 0x0600
+
+/* Define to '0x0600' for Windows Vista APIs. */
+#define _WIN32_WINNT 0x0600
 #endif
-
-/* Number of bits in a file offset, on hosts where this is settable. */
-#define _FILE_OFFSET_BITS 64
-
-/* Define for large files, on AIX-style hosts. */
-/* #undef _LARGE_FILES */
-
-/* Define to '0x0500' for IE 5.0 (and shell) APIs. */
-#define _WIN32_IE 0x0500
-
-/* Define to empty if `const' does not conform to ANSI C. */
-/* #undef const */
-
-/* Define to `__inline__' or `__inline' if that's what the C compiler
-   calls it, or to nothing if 'inline' is not supported under any name.  */
-#ifndef __cplusplus
-/* #undef inline */
-#endif
-
-/* Define to `unsigned int' if <sys/types.h> does not define. */
-/* #undef size_t */

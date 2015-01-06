@@ -51,7 +51,6 @@
     <ClInclude Include="..\src\ioctl.h" />
     <ClInclude Include="..\src\libdvdcss.h" />
     <ClInclude Include="config.h" />
-    <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\css.c" />
