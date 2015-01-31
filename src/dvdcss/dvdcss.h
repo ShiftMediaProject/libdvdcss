@@ -2,21 +2,21 @@
  * \file dvdcss.h
  * \author Stéphane Borel <stef@via.ecp.fr>
  * \author Sam Hocevar <sam@zoy.org>
+ *
  * \brief The \e libdvdcss public header.
  *
- * This header contains the public types and functions that applications
- * using \e libdvdcss may use.
+ * Public types and functions that describe the API of the \e libdvdcss library.
  */
 
 /*
  * Copyright (C) 1998-2008 VideoLAN
  *
- * This program is free software; you can redistribute it and/or modify
+ * libdvdcss is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * libdvdcss is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -31,12 +31,25 @@
 #define DVDCSS_DVDCSS_H 1
 #endif
 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /** Library instance handle, to be used for each library call. */
 typedef struct dvdcss_s* dvdcss_t;
+
+/** Set of callbacks to access DVDs in custom ways. */
+typedef struct dvdcss_stream_cb
+{
+    /** custom seek callback */
+    int ( *pf_seek )  ( void *p_stream, uint64_t i_pos);
+    /** custom read callback */
+    int ( *pf_read )  ( void *p_stream, void *buffer, int i_read);
+    /** custom vectored read callback */
+    int ( *pf_readv ) ( void *p_stream, const void *p_iovec, int i_blocks);
+} dvdcss_stream_cb;
 
 
 /** The block size of a DVD. */
@@ -55,6 +68,9 @@ typedef struct dvdcss_s* dvdcss_t;
 #define DVDCSS_SEEK_KEY        (1 << 1)
 
 
+/** Macro for setting symbol storage-class or visibility.
+ * Define LIBDVDCSS_IMPORTS before importing this header to get the
+ * correct DLL storage-class when using \e libdvdcss from MSVC. */
 #if defined(LIBDVDCSS_EXPORTS)
 #define LIBDVDCSS_EXPORT __declspec(dllexport) extern
 #elif defined(LIBDVDCSS_IMPORTS)
@@ -69,7 +85,9 @@ typedef struct dvdcss_s* dvdcss_t;
 /*
  * Exported prototypes.
  */
-LIBDVDCSS_EXPORT dvdcss_t dvdcss_open  ( char *psz_target );
+LIBDVDCSS_EXPORT dvdcss_t dvdcss_open  ( const char *psz_target );
+LIBDVDCSS_EXPORT dvdcss_t dvdcss_open_stream( void *p_stream,
+                                              dvdcss_stream_cb *p_stream_cb );
 LIBDVDCSS_EXPORT int      dvdcss_close ( dvdcss_t );
 LIBDVDCSS_EXPORT int      dvdcss_seek  ( dvdcss_t,
                                int i_blocks,
@@ -82,7 +100,7 @@ LIBDVDCSS_EXPORT int      dvdcss_readv ( dvdcss_t,
                                void *p_iovec,
                                int i_blocks,
                                int i_flags );
-LIBDVDCSS_EXPORT char *   dvdcss_error ( dvdcss_t );
+LIBDVDCSS_EXPORT const char *dvdcss_error ( const dvdcss_t );
 
 LIBDVDCSS_EXPORT int      dvdcss_is_scrambled ( dvdcss_t );
 

@@ -7,12 +7,12 @@
  *          Sam Hocevar <sam@zoy.org>
  *          Håkan Hjort <d95hjort@dtek.chalmers.se>
  *
- * This program is free software; you can redistribute it and/or modify
+ * libdvdcss is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * libdvdcss is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -44,22 +44,13 @@ struct iovec
 
 #include "dvdcss/dvdcss.h"
 
-#if !defined(WIN32) && !defined(__OS2__)
-#   define DVDCSS_RAW_OPEN
-#endif
-
 
 /*****************************************************************************
  * Device reading prototypes
  *****************************************************************************/
-int  _dvdcss_use_ioctls ( dvdcss_t );
-void _dvdcss_check      ( dvdcss_t );
-int  _dvdcss_open       ( dvdcss_t );
-int  _dvdcss_close      ( dvdcss_t );
-
-/*****************************************************************************
- * Device reading prototypes, raw-device specific
- *****************************************************************************/
-int _dvdcss_raw_open     ( dvdcss_t, char const * );
+int  dvdcss_use_ioctls   ( dvdcss_t );
+void dvdcss_check_device ( dvdcss_t );
+int  dvdcss_open_device  ( dvdcss_t );
+int  dvdcss_close_device ( dvdcss_t );
 
 #endif /* DVDCSS_DEVICE_H */

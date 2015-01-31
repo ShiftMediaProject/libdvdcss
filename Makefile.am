@@ -1,19 +1,21 @@
 ACLOCAL_AMFLAGS = -I m4
 
-EXTRA_DIST = msvc libdvdcss.spec doc/header.html doc/footer.html INSTALL
+EXTRA_DIST = msvc libdvdcss.spec INSTALL
 
 dist_doc_DATA = AUTHORS COPYING NEWS README ChangeLog
 
 MAINTAINERCLEANFILES = ChangeLog
 
 ChangeLog: $(wildcard $(srcdir)/.git/logs/HEAD)
+if GIT
 	-cd $(srcdir) && git log > $(abs_builddir)/$(@)-tmp
 	test -s $(@)-tmp && mv $(@)-tmp $(@)
 	-rm -f $(@)-tmp
+endif
 	test -e $(@) || touch $(@)
 
 lib_LTLIBRARIES = libdvdcss.la
-EXTRA_PROGRAMS = csstest dvd_region
+EXTRA_PROGRAMS = test/csstest test/dvd_region
 
 libdvdcss_la_SOURCES = \
 	src/libdvdcss.c \
@@ -35,13 +37,13 @@ if !SYS_MSVC
 libdvdcss_la_LDFLAGS += -no-undefined
 endif
 
-csstest_SOURCES = test/csstest.c
-csstest_LDADD = libdvdcss.la
-csstest_CFLAGS = -I $(top_srcdir)/src
+test_csstest_SOURCES = test/csstest.c
+test_csstest_LDADD = libdvdcss.la
+test_csstest_CFLAGS = -I $(top_srcdir)/src
 
-dvd_region_SOURCES = test/dvd_region.c src/ioctl.c
-dvd_region_LDADD = libdvdcss.la
-dvd_region_CFLAGS = -I $(top_srcdir)/src
+test_dvd_region_SOURCES = test/dvd_region.c
+test_dvd_region_LDADD = libdvdcss.la
+test_dvd_region_CFLAGS = -I $(top_srcdir)/src
 
 pkgincludedir = $(includedir)/dvdcss
 pkginclude_HEADERS = src/dvdcss/dvdcss.h
@@ -57,12 +59,14 @@ endif
 
 apidoc: stamp-doxygen
 
-stamp-doxygen: doc/doxygen.cfg
-	cd doc && doxygen doxygen.cfg
+stamp-doxygen: doc/doxygen.cfg src/libdvdcss.c src/dvdcss/dvdcss.h
+	doxygen $<
 	touch $@
 
+tools: test/csstest$(EXEEXT) test/dvd_region$(EXEEXT)
+
 clean-local:
-	-rm -Rf stamp-doxygen doc/html
+	-rm -Rf stamp-doxygen doc/doxygen_sqlite3.db doc/html
 
 install-apidoc:
 	$(MKDIR_P) $(DESTDIR)$(htmldir)
@@ -72,3 +76,5 @@ install-apidoc:
 
 uninstall-apidoc:
 	-rm -Rf $(DESTDIR)$(htmldir)/*.png $(DESTDIR)$(htmldir)/*.html $(DESTDIR)$(htmldir)/*.css $(DESTDIR)$(htmldir)/*.js
+
+.PHONY: apidoc tools

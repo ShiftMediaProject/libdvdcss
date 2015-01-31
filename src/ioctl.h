@@ -5,12 +5,12 @@
  *
  * Authors: Sam Hocevar <sam@zoy.org>
  *
- * This program is free software; you can redistribute it and/or modify
+ * libdvdcss is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * libdvdcss is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -23,52 +23,33 @@
 #ifndef DVDCSS_IOCTL_H
 #define DVDCSS_IOCTL_H
 
+#include <stdint.h>
+
 int ioctl_ReadCopyright     ( int, int, int * );
-int ioctl_ReadDiscKey       ( int, int *, uint8_t * );
-int ioctl_ReadTitleKey      ( int, int *, int, uint8_t * );
+int ioctl_ReadDiscKey       ( int, const int *, uint8_t * );
+int ioctl_ReadTitleKey      ( int, const int *, int, uint8_t * );
 int ioctl_ReportAgid        ( int, int * );
-int ioctl_ReportChallenge   ( int, int *, uint8_t * );
-int ioctl_ReportKey1        ( int, int *, uint8_t * );
-int ioctl_ReportASF         ( int, int *, int * );
+int ioctl_ReportChallenge   ( int, const int *, uint8_t * );
+int ioctl_ReportKey1        ( int, const int *, uint8_t * );
+int ioctl_ReportASF         ( int, int * );
 int ioctl_InvalidateAgid    ( int, int * );
-int ioctl_SendChallenge     ( int, int *, uint8_t * );
-int ioctl_SendKey2          ( int, int *, uint8_t * );
+int ioctl_SendChallenge     ( int, const int *, const uint8_t * );
+int ioctl_SendKey2          ( int, const int *, const uint8_t * );
 int ioctl_ReportRPC         ( int, int *, int *, int * );
 
-#define DVD_KEY_SIZE 5
-#define DVD_CHALLENGE_SIZE 10
 #define DVD_DISCKEY_SIZE 2048
 
 /*****************************************************************************
- * Common macro, BeOS specific
+ * Common macros, OS-specific
  *****************************************************************************/
-#if defined( __BEOS__ )
+#if defined( __HAIKU__ )
 #define INIT_RDC( TYPE, SIZE ) \
     raw_device_command rdc = { 0 }; \
     uint8_t p_buffer[ (SIZE)+1 ]; \
     rdc.data = (char *)p_buffer; \
     rdc.data_length = (SIZE); \
     BeInitRDC( &rdc, (TYPE) );
-#endif
-
-/*****************************************************************************
- * Common macro, HP-UX specific
- *****************************************************************************/
-#if defined( HPUX_SCTL_IO )
-#define INIT_SCTL_IO( TYPE, SIZE ) \
-    struct sctl_io sctl_io = { 0 }; \
-    uint8_t p_buffer[ (SIZE)+1 ]; \
-    sctl_io.data = (void *)p_buffer; \
-    sctl_io.data_length = (SIZE); \
-    HPUXInitSCTL( &sctl_io, (TYPE) );
-#endif
-
-/*****************************************************************************
- * Common macro, Solaris specific
- *****************************************************************************/
-#if defined( SOLARIS_USCSI )
-#define USCSI_TIMEOUT( SC, TO ) ( (SC)->uscsi_timeout = (TO) )
-#define USCSI_RESID( SC )       ( (SC)->uscsi_resid )
+#elif defined( SOLARIS_USCSI )
 #define INIT_USCSI( TYPE, SIZE ) \
     struct uscsi_cmd sc = { 0 }; \
     union scsi_cdb rs_cdb; \
@@ -77,49 +58,14 @@ int ioctl_ReportRPC         ( int, int *, int *, int * );
     sc.uscsi_bufaddr = (caddr_t)p_buffer; \
     sc.uscsi_buflen = (SIZE); \
     SolarisInitUSCSI( &sc, (TYPE) );
-#endif
-
-/*****************************************************************************
- * Common macro, Darwin specific
- *****************************************************************************/
-#if defined( DARWIN_DVD_IOCTL )
+#elif defined( DARWIN_DVD_IOCTL )
 #define INIT_DVDIOCTL( DKDVD_TYPE, BUFFER_TYPE, FORMAT ) \
     DKDVD_TYPE dvd = { 0 }; \
     BUFFER_TYPE dvdbs = { 0 }; \
     dvd.format = FORMAT; \
     dvd.buffer = &dvdbs; \
     dvd.bufferLength = sizeof(dvdbs);
-#endif
-
-/*****************************************************************************
- * Common macro, win32 specific
- *****************************************************************************/
-#if defined( WIN32 )
-#define INIT_SPTD( TYPE, SIZE ) \
-    DWORD tmp; \
-    SCSI_PASS_THROUGH_DIRECT sptd = { 0 }; \
-    uint8_t p_buffer[ (SIZE) ]; \
-    sptd.Length = sizeof( SCSI_PASS_THROUGH_DIRECT ); \
-    sptd.DataBuffer = p_buffer; \
-    sptd.DataTransferLength = (SIZE); \
-    WinInitSPTD( &sptd, (TYPE) );
-#define SEND_SPTD( DEV, SPTD, TMP ) \
-    (DeviceIoControl( (HANDLE)(DEV), IOCTL_SCSI_PASS_THROUGH_DIRECT, \
-                      (SPTD), sizeof( SCSI_PASS_THROUGH_DIRECT ), \
-                      (SPTD), sizeof( SCSI_PASS_THROUGH_DIRECT ), \
-                      (TMP), NULL ) ? 0 : -1)
-#define INIT_SSC( TYPE, SIZE ) \
-    struct SRB_ExecSCSICmd ssc = { 0 }; \
-    uint8_t p_buffer[ (SIZE)+1 ]; \
-    ssc.SRB_BufPointer = (unsigned char *)p_buffer; \
-    ssc.SRB_BufLen = (SIZE); \
-    WinInitSSC( &ssc, (TYPE) );
-#endif
-
-/*****************************************************************************
- * Common macro, QNX specific
- *****************************************************************************/
-#if defined( __QNXNTO__ )
+#elif defined( __QNXNTO__ )
 #define INIT_CPT( TYPE, SIZE ) \
     CAM_PASS_THRU * p_cpt = { 0 }; \
     uint8_t * p_buffer; \
@@ -129,12 +75,7 @@ int ioctl_ReportRPC         ( int, int *, int *, int * );
       p_cpt->cam_data_ptr = sizeof( CAM_PASS_THRU ); \
       p_cpt->cam_dxfer_len = (SIZE); \
     QNXInitCPT( p_cpt, (TYPE) );
-#endif
-
-/*****************************************************************************
- * Common macro, OS2 specific
- *****************************************************************************/
-#if defined( __OS2__ )
+#elif defined( __OS2__ )
 #define INIT_SSC( TYPE, SIZE ) \
     struct OS2_ExecSCSICmd sdc = { 0 }; \
     uint8_t p_buffer[ (SIZE) + 1 ] = { 0 }; \
@@ -146,7 +87,7 @@ int ioctl_ReportRPC         ( int, int *, int *, int * );
 #endif
 
 /*****************************************************************************
- * Additional types, OpenBSD specific
+ * Additional types, OpenBSD-specific
  *****************************************************************************/
 #if defined( HAVE_OPENBSD_DVD_STRUCT )
 typedef union dvd_struct dvd_struct;
@@ -180,12 +121,13 @@ typedef union dvd_authinfo dvd_authinfo;
 #define DVDCSS_INVALIDATE_AGID   0x3f
 
 /*****************************************************************************
- * win32 ioctl specific
+ * Win32-ioctl-specific
  *****************************************************************************/
-#if defined( WIN32 )
+#if defined( _WIN32 )
 
-#define WIN32_LEAN_AND_MEAN
+#define _WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <winioctl.h>
 
 #define IOCTL_DVD_START_SESSION         CTL_CODE(FILE_DEVICE_DVD, 0x0400, METHOD_BUFFERED, FILE_READ_ACCESS)
 #define IOCTL_DVD_READ_KEY              CTL_CODE(FILE_DEVICE_DVD, 0x0401, METHOD_BUFFERED, FILE_READ_ACCESS)
@@ -303,96 +245,10 @@ typedef struct SCSI_PASS_THROUGH_DIRECT
     UCHAR Cdb[16];
 } SCSI_PASS_THROUGH_DIRECT, *PSCSI_PASS_THROUGH_DIRECT;
 
-/*****************************************************************************
- * win32 aspi specific
- *****************************************************************************/
-
-typedef DWORD (CALLBACK *GETASPI32SUPPORTINFO)(VOID);
-typedef DWORD (CALLBACK *SENDASPI32COMMAND)(LPVOID);
-
-#define WIN2K               ( GetVersion() < 0x80000000 )
-#define ASPI_HAID           0
-#define ASPI_TARGET         0
-#define DTYPE_CDROM         0x05
-
-#define SENSE_LEN           0x0E
-#define SC_GET_DEV_TYPE     0x01
-#define SC_EXEC_SCSI_CMD    0x02
-#define SC_GET_DISK_INFO    0x06
-#define SS_COMP             0x01
-#define SS_PENDING          0x00
-#define SS_NO_ADAPTERS      0xE8
-#define SRB_DIR_IN          0x08
-#define SRB_DIR_OUT         0x10
-#define SRB_EVENT_NOTIFY    0x40
-
-struct w32_aspidev
-{
-    long  hASPI;
-    short i_sid;
-    int   i_blocks;
-    SENDASPI32COMMAND lpSendCommand;
-};
-
-#pragma pack(1)
-
-struct SRB_GetDiskInfo
-{
-    unsigned char   SRB_Cmd;
-    unsigned char   SRB_Status;
-    unsigned char   SRB_HaId;
-    unsigned char   SRB_Flags;
-    unsigned long   SRB_Hdr_Rsvd;
-    unsigned char   SRB_Target;
-    unsigned char   SRB_Lun;
-    unsigned char   SRB_DriveFlags;
-    unsigned char   SRB_Int13HDriveInfo;
-    unsigned char   SRB_Heads;
-    unsigned char   SRB_Sectors;
-    unsigned char   SRB_Rsvd1[22];
-};
-
-struct SRB_GDEVBlock
-{
-    unsigned char SRB_Cmd;
-    unsigned char SRB_Status;
-    unsigned char SRB_HaId;
-    unsigned char SRB_Flags;
-    unsigned long SRB_Hdr_Rsvd;
-    unsigned char SRB_Target;
-    unsigned char SRB_Lun;
-    unsigned char SRB_DeviceType;
-    unsigned char SRB_Rsvd1;
-};
-
-struct SRB_ExecSCSICmd
-{
-    unsigned char   SRB_Cmd;
-    unsigned char   SRB_Status;
-    unsigned char   SRB_HaId;
-    unsigned char   SRB_Flags;
-    unsigned long   SRB_Hdr_Rsvd;
-    unsigned char   SRB_Target;
-    unsigned char   SRB_Lun;
-    unsigned short  SRB_Rsvd1;
-    unsigned long   SRB_BufLen;
-    unsigned char   *SRB_BufPointer;
-    unsigned char   SRB_SenseLen;
-    unsigned char   SRB_CDBLen;
-    unsigned char   SRB_HaStat;
-    unsigned char   SRB_TargStat;
-    unsigned long   *SRB_PostProc;
-    unsigned char   SRB_Rsvd2[20];
-    unsigned char   CDBByte[16];
-    unsigned char   SenseArea[SENSE_LEN+2];
-};
-
-#pragma pack()
-
-#endif
+#endif /* defined( _WIN32 ) */
 
 /*****************************************************************************
- * OS2 ioctl specific
+ * OS/2-ioctl-specific
  *****************************************************************************/
 #if defined( __OS2__ )
 
@@ -415,6 +271,6 @@ struct OS2_ExecSCSICmd
 
 #pragma pack()
 
-#endif
+#endif /* defined( __OS2__ ) */
 
 #endif /* DVDCSS_IOCTL_H */

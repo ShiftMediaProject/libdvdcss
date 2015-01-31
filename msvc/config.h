@@ -13,7 +13,6 @@
 /* #undef HAVE_LINUX_DVD_STRUCT */
 #define HAVE_MEMORY_H 1
 /* #undef HAVE_OPENBSD_DVD_STRUCT */
-/* #undef HAVE_STDINT_H */
 #define HAVE_STDLIB_H 1
 #define HAVE_STRINGS_H 1
 #define HAVE_STRING_H 1
@@ -27,7 +26,6 @@
 #define HAVE_WINDOWS_H 1
 #define HAVE_WINIOCTL_H 1
 /* #undef HAVE__SYS_DEV_SCSI_SCSI_IOCTL_H */
-/* #undef HPUX_SCTL_IO */
 #define PACKAGE "libdvdcss"
 #define PACKAGE_BUGREPORT ""
 #define PACKAGE_NAME "libdvdcss"
@@ -37,10 +35,10 @@
 /* #undef SOLARIS_USCSI */
 #define STDC_HEADERS 1
 #define VERSION "1.3.0"
-#define _WIN32_IE 0x0500
+#define _WIN32_IE 0x0501
 /* #undef const */
 /* #undef inline */
 /* #undef size_t */
 #define HAVE_BROKEN_MKDIR 1
 #define _CRT_SECURE_NO_WARNINGS 1
-
+#define LIBDVDCSS_EXPORTS 1

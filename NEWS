@@ -1,3 +1,17 @@
+Changes between 1.3.0 and 1.3.99:
+---------------------------------
+  * Drop support for HP-UX.
+  * Drop support for Windows 9x and Windows NT.
+    Windows 2000 is now required.
+  * Replace BeOS support by Haiku support.
+  * Add dvdcss_open_stream() to public API. This allows installing custom
+    callback functions for accessing DVD, e.g. over the network.
+  * dvdcss_error() now returns "const char *" instad of "char *".
+  * Drop support for MSVC versions before 2010.
+  * Raw device access now errors out if the device cannot be opened.
+  * Miscellaneous cleanups to code, documentation, build system.
+
+
 Changes between 1.2.13 and 1.3.0:
 ---------------------------------
 
@@ -146,4 +160,3 @@ Changes between 0.0.1 and 0.0.2:
 
   * internal key cache mechanism
   * stability fixes
-

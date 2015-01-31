@@ -1,4 +1,4 @@
-AC_INIT(libdvdcss, 1.3.0)
+AC_INIT(libdvdcss, 1.3.99, , , https://www.videolan.org/developers/libdvdcss.html)
 AC_CONFIG_SRCDIR([src/libdvdcss.c])
 
 AC_PREREQ(2.50)
@@ -39,11 +39,11 @@ dnl    are platform dependent
 dnl  * in Linux, the library will be named
 dnl    libname.so.(DVDCSS_LT_CURRENT - DVDCSS_LT_AGE).DVDCSS_LT_AGE.DVDCSS_LT_REVISION
 
-DVDCSS_LT_CURRENT=3
-DVDCSS_LT_AGE=0
-DVDCSS_LT_REVISION=1
+DVDCSS_LT_CURRENT=4
+DVDCSS_LT_AGE=2
+DVDCSS_LT_REVISION=0
 
-AC_SUBST([DVDCSS_LTVERSION], [$DVDCSS_LT_CURRENT:$DVDCSS_LT_AGE:$DVDCSS_LT_REVISION])
+AC_SUBST([DVDCSS_LTVERSION], [$DVDCSS_LT_CURRENT:$DVDCSS_LT_REVISION:$DVDCSS_LT_AGE])
 
 AC_PROG_CC
 AC_HEADER_STDC
@@ -52,7 +52,7 @@ AC_C_CONST
 AC_C_INLINE
 AC_TYPE_SIZE_T
 
-AC_CHECK_HEADERS([unistd.h sys/param.h sys/uio.h limits.h pwd.h]dnl
+AC_CHECK_HEADERS([unistd.h sys/param.h sys/uio.h pwd.h]dnl
   [errno.h sys/types.h sys/stat.h fcntl.h io.h])
 
 AC_CHECK_DECL([O_BINARY], [],
@@ -104,19 +104,19 @@ case x"${host_os}" in
   xdarwin*)
     CFLAGS="${CFLAGS} -no-cpp-precomp"
     ;;
-  x*cygwin*)
+  x*cygwin* | x*msys*)
     CFLAGS="${CFLAGS} -mwin32"
-    AC_DEFINE([_WIN32_IE], 0x0500, [Define to '0x0500' for IE 5.0 (and shell) APIs.])
+    AC_DEFINE([_WIN32_IE], 0x0501, [Define to '0x0501' for IE 5.01 (and shell) APIs.])
     ;;
   xos2*)
     LDFLAGS="-Zbin-files"
     ;;
   x*msvc*)
     SYS_MSVC=1
-    AC_DEFINE([_WIN32_IE], 0x0500, [Define to '0x0500' for IE 5.0 (and shell) APIs.])
+    AC_DEFINE([_WIN32_IE], 0x0501, [Define to '0x0501' for IE 5.01 (and shell) APIs.])
     ;;
-  x*mingw* | *wince* | *mingwce*)
-    AC_DEFINE([_WIN32_IE], 0x0500, [Define to '0x0500' for IE 5.0 (and shell) APIs.])
+  x*mingw* | x*wince* | x*mingwce*)
+    AC_DEFINE([_WIN32_IE], 0x0501, [Define to '0x0501' for IE 5.01 (and shell) APIs.])
     ;;
   x*)
     ;;
@@ -138,7 +138,7 @@ AC_CHECK_HEADERS(windows.h,[
   ])
 ])
 
-dnl  for Un*x and BeOS
+dnl for Unix
 AC_CHECK_HEADERS(sys/ioctl.h,[
   CAN_BUILD_LIBDVDCSS=1
   AC_CHECK_HEADERS(sys/cdio.h sys/dvdio.h linux/cdrom.h dvd.h)
@@ -181,15 +181,7 @@ AC_CHECK_HEADERS(sys/ioctl.h,[
     AC_DEFINE(SOLARIS_USCSI, 1, Have userspace SCSI headers.)
   ])
   dnl
-  dnl HP-UX: sys/scsi.h
-  dnl
-  AC_CHECK_HEADER(sys/scsi.h,[
-    AC_EGREP_HEADER(sctl_io,sys/scsi.h,[
-      AC_DEFINE(HPUX_SCTL_IO, 1, Define if <sys/scsi.h> defines sctl_io.)
-    ])
-  ])
-  dnl
-  dnl Darwin 
+  dnl Darwin
   dnl
   AC_CHECK_HEADER(IOKit/storage/IODVDMediaBSDClient.h,[
     AC_DEFINE(DARWIN_DVD_IOCTL, 1, Have IOKit DVD IOCTL headers)
@@ -199,7 +191,7 @@ AC_CHECK_HEADERS(sys/ioctl.h,[
   dnl Final tests to check what was detected
   dnl
   if test x$LINUX_DVD_STRUCT = x1; then
-    AC_DEFINE(HAVE_LINUX_DVD_STRUCT, 1, 
+    AC_DEFINE(HAVE_LINUX_DVD_STRUCT, 1,
               Define if Linux-like dvd_struct is defined.)
     if test x$OPENBSD_DVD_STRUCT = x1; then
       AC_DEFINE(HAVE_OPENBSD_DVD_STRUCT, 1,
@@ -213,7 +205,7 @@ AC_CHECK_HEADERS(sys/ioctl.h,[
   fi
 ])
 
-CC_CHECK_CFLAGS_APPEND([-Wall -Wsign-compare -Wextra])
+CC_CHECK_CFLAGS_APPEND([-Wall -Wextra])
 CC_FLAG_VISIBILITY([
   CC_ATTRIBUTE_VISIBILITY([default], [
     CFLAGS="${CFLAGS} -fvisibility=hidden"
@@ -236,9 +228,13 @@ AS_IF([test "x$DOXYGEN" = "x"], [
 ])
 AM_CONDITIONAL([APIDOC], [test "x$DOXYGEN" != "x"])
 
+AC_PATH_PROG([GIT], [git])
+AM_CONDITIONAL([GIT], [test "x$GIT" != "x"])
+
 AC_SUBST(DVDCSS_LDFLAGS)
 AC_OUTPUT([
   Makefile
+  libdvdcss.spec
   doc/doxygen.cfg
   src/libdvdcss.pc
 ])
