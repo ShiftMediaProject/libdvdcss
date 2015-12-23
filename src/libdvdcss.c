@@ -117,6 +117,7 @@
 #endif
 
 #ifdef _WIN32
+#   include <windows.h>
 #   include <shlobj.h>
 #endif
 
@@ -215,6 +216,18 @@ static int set_cache_directory( dvdcss_t dvdcss )
             psz_cache = dvdcss->psz_cachefile;
         }
 #else
+#ifdef __ANDROID__
+        /* $HOME is not writable on __ANDROID__ so we have to create a custom
+         * directory in userland */
+        char *psz_home = "/sdcard/Android/data/org.videolan.dvdcss";
+
+        int i_ret = mkdir( psz_home, 0755 );
+        if( i_ret < 0 && errno != EEXIST )
+        {
+            print_error( dvdcss, "failed creating home directory" );
+            psz_home = NULL;
+        }
+#else
         char *psz_home = NULL;
 #ifdef HAVE_PWD_H
         struct passwd *p_pwd;
@@ -226,6 +239,8 @@ static int set_cache_directory( dvdcss_t dvdcss )
             psz_home = p_pwd->pw_dir;
         }
 #endif /* HAVE_PWD_H */
+
+#endif /* __ANDROID__ */
 
         if( psz_home == NULL )
         {
@@ -490,9 +505,12 @@ static dvdcss_t dvdcss_open_common ( const char *psz_target, void *p_stream,
 
     if( psz_target == NULL &&
       ( p_stream == NULL || p_stream_cb == NULL ) )
-        return NULL;
+    {
+        goto error;
+    }
 
     /* Initialize structure with default values. */
+    dvdcss->i_fd = -1;
     dvdcss->i_pos = 0;
     dvdcss->p_titles = NULL;
     dvdcss->psz_device = psz_target ? strdup( psz_target ) : NULL;
