@@ -260,10 +260,10 @@
       <SubSystem>Windows</SubSystem>
     </Lib>
     <PostBuildEvent>
-      <Command>mkdir $(OutDir)\include
-mkdir $(OutDir)\include\dvdcss
-copy ..\src\dvdcss\dvdcss.h $(OutDir)\include\dvdcss
-copy .\src\dvdcss\version.h $(OutDir)\include\dvdcss
+      <Command>mkdir "$(OutDir)"\include
+mkdir "$(OutDir)"\include\dvdcss
+copy ..\src\dvdcss\dvdcss.h "$(OutDir)"\include\dvdcss
+copy .\src\dvdcss\version.h "$(OutDir)"\include\dvdcss
 mkdir $(OutDir)\licenses
 copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
     </PostBuildEvent>
@@ -271,8 +271,8 @@ copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
       <Command>if exist ..\config.h (
 del ..\config.h
 )
-if exist $(OutDir)\include\dvdcss (
-rd /s /q $(OutDir)\include\dvdcss
+if exist "$(OutDir)"\include\dvdcss (
+rd /s /q "$(OutDir)"\include\dvdcss
 cd ../
 cd $(ProjectDir)
 )</Command>
@@ -282,8 +282,8 @@ cd $(ProjectDir)
     </CustomBuildStep>
     <CustomBuildStep>
       <Outputs>force_clean</Outputs>
-      <Command>if exist $(OutDir)\include\dvdcss (
-rmdir /s /q $(OutDir)\include\dvdcss
+      <Command>if exist "$(OutDir)"\include\dvdcss (
+rmdir /s /q "$(OutDir)"\include\dvdcss
 )
 if exist $(OutDir)\licenses\libdvdcss.txt (
 del /f /q $(OutDir)\licenses\libdvdcss.txt
@@ -310,10 +310,10 @@ del /f /q $(OutDir)\licenses\libdvdcss.txt
       <SubSystem>Windows</SubSystem>
     </Lib>
     <PostBuildEvent>
-      <Command>mkdir $(OutDir)\include
-mkdir $(OutDir)\include\dvdcss
-copy ..\src\dvdcss\dvdcss.h $(OutDir)\include\dvdcss
-copy .\src\dvdcss\version.h $(OutDir)\include\dvdcss
+      <Command>mkdir "$(OutDir)"\include
+mkdir "$(OutDir)"\include\dvdcss
+copy ..\src\dvdcss\dvdcss.h "$(OutDir)"\include\dvdcss
+copy .\src\dvdcss\version.h "$(OutDir)"\include\dvdcss
 mkdir $(OutDir)\licenses
 copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
     </PostBuildEvent>
@@ -321,8 +321,8 @@ copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
       <Command>if exist ..\config.h (
 del ..\config.h
 )
-if exist $(OutDir)\include\dvdcss (
-rd /s /q $(OutDir)\include\dvdcss
+if exist "$(OutDir)"\include\dvdcss (
+rd /s /q "$(OutDir)"\include\dvdcss
 cd ../
 cd $(ProjectDir)
 )</Command>
@@ -332,8 +332,8 @@ cd $(ProjectDir)
     </CustomBuildStep>
     <CustomBuildStep>
       <Outputs>force_clean</Outputs>
-      <Command>if exist $(OutDir)\include\dvdcss (
-rmdir /s /q $(OutDir)\include\dvdcss
+      <Command>if exist "$(OutDir)"\include\dvdcss (
+rmdir /s /q "$(OutDir)"\include\dvdcss
 )
 if exist $(OutDir)\licenses\libdvdcss.txt (
 del /f /q $(OutDir)\licenses\libdvdcss.txt
@@ -365,10 +365,10 @@ del /f /q $(OutDir)\licenses\libdvdcss.txt
       <MinimumRequiredVersion>5.1</MinimumRequiredVersion>
     </Link>
     <PostBuildEvent>
-      <Command>mkdir $(OutDir)\include
-mkdir $(OutDir)\include\dvdcss
-copy ..\src\dvdcss\dvdcss.h $(OutDir)\include\dvdcss
-copy .\src\dvdcss\version.h $(OutDir)\include\dvdcss
+      <Command>mkdir "$(OutDir)"\include
+mkdir "$(OutDir)"\include\dvdcss
+copy ..\src\dvdcss\dvdcss.h "$(OutDir)"\include\dvdcss
+copy .\src\dvdcss\version.h "$(OutDir)"\include\dvdcss
 mkdir $(OutDir)\licenses
 copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
     </PostBuildEvent>
@@ -376,8 +376,8 @@ copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
       <Command>if exist ..\config.h (
 del ..\config.h
 )
-if exist $(OutDir)\include\dvdcss (
-rd /s /q $(OutDir)\include\dvdcss
+if exist "$(OutDir)"\include\dvdcss (
+rd /s /q "$(OutDir)"\include\dvdcss
 cd ../
 cd $(ProjectDir)
 )</Command>
@@ -387,8 +387,8 @@ cd $(ProjectDir)
     </CustomBuildStep>
     <CustomBuildStep>
       <Outputs>force_clean</Outputs>
-      <Command>if exist $(OutDir)\include\dvdcss (
-rmdir /s /q $(OutDir)\include\dvdcss
+      <Command>if exist "$(OutDir)"\include\dvdcss (
+rmdir /s /q "$(OutDir)"\include\dvdcss
 )
 if exist $(OutDir)\licenses\libdvdcss.txt (
 del /f /q $(OutDir)\licenses\libdvdcss.txt
@@ -418,10 +418,10 @@ del /f /q $(OutDir)\licenses\libdvdcss.txt
       <MinimumRequiredVersion>6.0</MinimumRequiredVersion>
     </Link>
     <PostBuildEvent>
-      <Command>mkdir $(OutDir)\include
-mkdir $(OutDir)\include\dvdcss
-copy ..\src\dvdcss\dvdcss.h $(OutDir)\include\dvdcss
-copy .\src\dvdcss\version.h $(OutDir)\include\dvdcss
+      <Command>mkdir "$(OutDir)"\include
+mkdir "$(OutDir)"\include\dvdcss
+copy ..\src\dvdcss\dvdcss.h "$(OutDir)"\include\dvdcss
+copy .\src\dvdcss\version.h "$(OutDir)"\include\dvdcss
 mkdir $(OutDir)\licenses
 copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
     </PostBuildEvent>
@@ -429,8 +429,8 @@ copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
       <Command>if exist ..\config.h (
 del ..\config.h
 )
-if exist $(OutDir)\include\dvdcss (
-rd /s /q $(OutDir)\include\dvdcss
+if exist "$(OutDir)"\include\dvdcss (
+rd /s /q "$(OutDir)"\include\dvdcss
 cd ../
 cd $(ProjectDir)
 )</Command>
@@ -440,8 +440,8 @@ cd $(ProjectDir)
     </CustomBuildStep>
     <CustomBuildStep>
       <Outputs>force_clean</Outputs>
-      <Command>if exist $(OutDir)\include\dvdcss (
-rmdir /s /q $(OutDir)\include\dvdcss
+      <Command>if exist "$(OutDir)"\include\dvdcss (
+rmdir /s /q "$(OutDir)"\include\dvdcss
 )
 if exist $(OutDir)\licenses\libdvdcss.txt (
 del /f /q $(OutDir)\licenses\libdvdcss.txt
@@ -477,10 +477,10 @@ del /f /q $(OutDir)\licenses\libdvdcss.txt
       <SubSystem>Windows</SubSystem>
     </Lib>
     <PostBuildEvent>
-      <Command>mkdir $(OutDir)\include
-mkdir $(OutDir)\include\dvdcss
-copy ..\src\dvdcss\dvdcss.h $(OutDir)\include\dvdcss
-copy .\src\dvdcss\version.h $(OutDir)\include\dvdcss
+      <Command>mkdir "$(OutDir)"\include
+mkdir "$(OutDir)"\include\dvdcss
+copy ..\src\dvdcss\dvdcss.h "$(OutDir)"\include\dvdcss
+copy .\src\dvdcss\version.h "$(OutDir)"\include\dvdcss
 mkdir $(OutDir)\licenses
 copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
     </PostBuildEvent>
@@ -488,8 +488,8 @@ copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
       <Command>if exist ..\config.h (
 del ..\config.h
 )
-if exist $(OutDir)\include\dvdcss (
-rd /s /q $(OutDir)\include\dvdcss
+if exist "$(OutDir)"\include\dvdcss (
+rd /s /q "$(OutDir)"\include\dvdcss
 cd ../
 cd $(ProjectDir)
 )</Command>
@@ -499,8 +499,8 @@ cd $(ProjectDir)
     </CustomBuildStep>
     <CustomBuildStep>
       <Outputs>force_clean</Outputs>
-      <Command>if exist $(OutDir)\include\dvdcss (
-rmdir /s /q $(OutDir)\include\dvdcss
+      <Command>if exist "$(OutDir)"\include\dvdcss (
+rmdir /s /q "$(OutDir)"\include\dvdcss
 )
 if exist $(OutDir)\licenses\libdvdcss.txt (
 del /f /q $(OutDir)\licenses\libdvdcss.txt
@@ -536,10 +536,10 @@ del /f /q $(OutDir)\licenses\libdvdcss.txt
       <SubSystem>Windows</SubSystem>
     </Lib>
     <PostBuildEvent>
-      <Command>mkdir $(OutDir)\include
-mkdir $(OutDir)\include\dvdcss
-copy ..\src\dvdcss\dvdcss.h $(OutDir)\include\dvdcss
-copy .\src\dvdcss\version.h $(OutDir)\include\dvdcss
+      <Command>mkdir "$(OutDir)"\include
+mkdir "$(OutDir)"\include\dvdcss
+copy ..\src\dvdcss\dvdcss.h "$(OutDir)"\include\dvdcss
+copy .\src\dvdcss\version.h "$(OutDir)"\include\dvdcss
 mkdir $(OutDir)\licenses
 copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
     </PostBuildEvent>
@@ -547,8 +547,8 @@ copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
       <Command>if exist ..\config.h (
 del ..\config.h
 )
-if exist $(OutDir)\include\dvdcss (
-rd /s /q $(OutDir)\include\dvdcss
+if exist "$(OutDir)"\include\dvdcss (
+rd /s /q "$(OutDir)"\include\dvdcss
 cd ../
 cd $(ProjectDir)
 )</Command>
@@ -558,8 +558,8 @@ cd $(ProjectDir)
     </CustomBuildStep>
     <CustomBuildStep>
       <Outputs>force_clean</Outputs>
-      <Command>if exist $(OutDir)\include\dvdcss (
-rmdir /s /q $(OutDir)\include\dvdcss
+      <Command>if exist "$(OutDir)"\include\dvdcss (
+rmdir /s /q "$(OutDir)"\include\dvdcss
 )
 if exist $(OutDir)\licenses\libdvdcss.txt (
 del /f /q $(OutDir)\licenses\libdvdcss.txt
@@ -595,10 +595,10 @@ del /f /q $(OutDir)\licenses\libdvdcss.txt
       <SubSystem>Windows</SubSystem>
     </Lib>
     <PostBuildEvent>
-      <Command>mkdir $(OutDir)\include
-mkdir $(OutDir)\include\dvdcss
-copy ..\src\dvdcss\dvdcss.h $(OutDir)\include\dvdcss
-copy .\src\dvdcss\version.h $(OutDir)\include\dvdcss
+      <Command>mkdir "$(OutDir)"\include
+mkdir "$(OutDir)"\include\dvdcss
+copy ..\src\dvdcss\dvdcss.h "$(OutDir)"\include\dvdcss
+copy .\src\dvdcss\version.h "$(OutDir)"\include\dvdcss
 mkdir $(OutDir)\licenses
 copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
     </PostBuildEvent>
@@ -606,8 +606,8 @@ copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
       <Command>if exist ..\config.h (
 del ..\config.h
 )
-if exist $(OutDir)\include\dvdcss (
-rd /s /q $(OutDir)\include\dvdcss
+if exist "$(OutDir)"\include\dvdcss (
+rd /s /q "$(OutDir)"\include\dvdcss
 cd ../
 cd $(ProjectDir)
 )</Command>
@@ -617,8 +617,8 @@ cd $(ProjectDir)
     </CustomBuildStep>
     <CustomBuildStep>
       <Outputs>force_clean</Outputs>
-      <Command>if exist $(OutDir)\include\dvdcss (
-rmdir /s /q $(OutDir)\include\dvdcss
+      <Command>if exist "$(OutDir)"\include\dvdcss (
+rmdir /s /q "$(OutDir)"\include\dvdcss
 )
 if exist $(OutDir)\licenses\libdvdcss.txt (
 del /f /q $(OutDir)\licenses\libdvdcss.txt
@@ -654,10 +654,10 @@ del /f /q $(OutDir)\licenses\libdvdcss.txt
       <SubSystem>Windows</SubSystem>
     </Lib>
     <PostBuildEvent>
-      <Command>mkdir $(OutDir)\include
-mkdir $(OutDir)\include\dvdcss
-copy ..\src\dvdcss\dvdcss.h $(OutDir)\include\dvdcss
-copy .\src\dvdcss\version.h $(OutDir)\include\dvdcss
+      <Command>mkdir "$(OutDir)"\include
+mkdir "$(OutDir)"\include\dvdcss
+copy ..\src\dvdcss\dvdcss.h "$(OutDir)"\include\dvdcss
+copy .\src\dvdcss\version.h "$(OutDir)"\include\dvdcss
 mkdir $(OutDir)\licenses
 copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
     </PostBuildEvent>
@@ -665,8 +665,8 @@ copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
       <Command>if exist ..\config.h (
 del ..\config.h
 )
-if exist $(OutDir)\include\dvdcss (
-rd /s /q $(OutDir)\include\dvdcss
+if exist "$(OutDir)"\include\dvdcss (
+rd /s /q "$(OutDir)"\include\dvdcss
 cd ../
 cd $(ProjectDir)
 )</Command>
@@ -676,8 +676,8 @@ cd $(ProjectDir)
     </CustomBuildStep>
     <CustomBuildStep>
       <Outputs>force_clean</Outputs>
-      <Command>if exist $(OutDir)\include\dvdcss (
-rmdir /s /q $(OutDir)\include\dvdcss
+      <Command>if exist "$(OutDir)"\include\dvdcss (
+rmdir /s /q "$(OutDir)"\include\dvdcss
 )
 if exist $(OutDir)\licenses\libdvdcss.txt (
 del /f /q $(OutDir)\licenses\libdvdcss.txt
@@ -716,10 +716,10 @@ del /f /q $(OutDir)\licenses\libdvdcss.txt
       <MinimumRequiredVersion>5.1</MinimumRequiredVersion>
     </Link>
     <PostBuildEvent>
-      <Command>mkdir $(OutDir)\include
-mkdir $(OutDir)\include\dvdcss
-copy ..\src\dvdcss\dvdcss.h $(OutDir)\include\dvdcss
-copy .\src\dvdcss\version.h $(OutDir)\include\dvdcss
+      <Command>mkdir "$(OutDir)"\include
+mkdir "$(OutDir)"\include\dvdcss
+copy ..\src\dvdcss\dvdcss.h "$(OutDir)"\include\dvdcss
+copy .\src\dvdcss\version.h "$(OutDir)"\include\dvdcss
 mkdir $(OutDir)\licenses
 copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
     </PostBuildEvent>
@@ -727,8 +727,8 @@ copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
       <Command>if exist ..\config.h (
 del ..\config.h
 )
-if exist $(OutDir)\include\dvdcss (
-rd /s /q $(OutDir)\include\dvdcss
+if exist "$(OutDir)"\include\dvdcss (
+rd /s /q "$(OutDir)"\include\dvdcss
 cd ../
 cd $(ProjectDir)
 )</Command>
@@ -738,8 +738,8 @@ cd $(ProjectDir)
     </CustomBuildStep>
     <CustomBuildStep>
       <Outputs>force_clean</Outputs>
-      <Command>if exist $(OutDir)\include\dvdcss (
-rmdir /s /q $(OutDir)\include\dvdcss
+      <Command>if exist "$(OutDir)"\include\dvdcss (
+rmdir /s /q "$(OutDir)"\include\dvdcss
 )
 if exist $(OutDir)\licenses\libdvdcss.txt (
 del /f /q $(OutDir)\licenses\libdvdcss.txt
@@ -777,10 +777,10 @@ del /f /q $(OutDir)\licenses\libdvdcss.txt
       <MinimumRequiredVersion>6.0</MinimumRequiredVersion>
     </Link>
     <PostBuildEvent>
-      <Command>mkdir $(OutDir)\include
-mkdir $(OutDir)\include\dvdcss
-copy ..\src\dvdcss\dvdcss.h $(OutDir)\include\dvdcss
-copy .\src\dvdcss\version.h $(OutDir)\include\dvdcss
+      <Command>mkdir "$(OutDir)"\include
+mkdir "$(OutDir)"\include\dvdcss
+copy ..\src\dvdcss\dvdcss.h "$(OutDir)"\include\dvdcss
+copy .\src\dvdcss\version.h "$(OutDir)"\include\dvdcss
 mkdir $(OutDir)\licenses
 copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
     </PostBuildEvent>
@@ -788,8 +788,8 @@ copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
       <Command>if exist ..\config.h (
 del ..\config.h
 )
-if exist $(OutDir)\include\dvdcss (
-rd /s /q $(OutDir)\include\dvdcss
+if exist "$(OutDir)"\include\dvdcss (
+rd /s /q "$(OutDir)"\include\dvdcss
 cd ../
 cd $(ProjectDir)
 )</Command>
@@ -799,8 +799,8 @@ cd $(ProjectDir)
     </CustomBuildStep>
     <CustomBuildStep>
       <Outputs>force_clean</Outputs>
-      <Command>if exist $(OutDir)\include\dvdcss (
-rmdir /s /q $(OutDir)\include\dvdcss
+      <Command>if exist "$(OutDir)"\include\dvdcss (
+rmdir /s /q "$(OutDir)"\include\dvdcss
 )
 if exist $(OutDir)\licenses\libdvdcss.txt (
 del /f /q $(OutDir)\licenses\libdvdcss.txt
