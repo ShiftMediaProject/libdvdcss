@@ -143,6 +143,16 @@
 #define MANUFACTURING_DATE_OFFSET 813
 #define MANUFACTURING_DATE_LENGTH  16
 
+static int exists_or_mkdir( const char *path, int perm )
+{
+    /* mkdir() may return an error if making the directory would fail,
+     * even if the directory exists, so use stat() to test for existence
+     * before trying to make the directory. */
+    struct stat st;
+    if( stat(path, &st) )
+        return mkdir(path, perm);
+    return 0;
+}
 
 static dvdcss_t dvdcss_open_common ( const char *psz_target, void *p_stream,
                                      dvdcss_stream_cb *p_stream_cb );
@@ -221,7 +231,7 @@ static int set_cache_directory( dvdcss_t dvdcss )
          * directory in userland */
         char *psz_home = "/sdcard/Android/data/org.videolan.dvdcss";
 
-        int i_ret = mkdir( psz_home, 0755 );
+        int i_ret = exists_or_mkdir( psz_home, 0755 );
         if( i_ret < 0 && errno != EEXIST )
         {
             print_error( dvdcss, "failed creating home directory" );
@@ -234,7 +244,7 @@ static int set_cache_directory( dvdcss_t dvdcss )
 
         /* Try looking in password file for home dir. */
         p_pwd = getpwuid(getuid());
-        if( p_pwd )
+        if( p_pwd && p_pwd->pw_dir && p_pwd->pw_dir[ 0 ] )
         {
             psz_home = p_pwd->pw_dir;
         }
@@ -248,7 +258,7 @@ static int set_cache_directory( dvdcss_t dvdcss )
         }
 
         /* Cache our keys in ${HOME}/.dvdcss/ */
-        if( psz_home )
+        if( psz_home && psz_home[ 0 ] )
         {
             int home_pos = 0;
 
@@ -274,6 +284,11 @@ static int set_cache_directory( dvdcss_t dvdcss )
         }
 #endif /* ! defined( _WIN32 ) */
     }
+    else
+    {
+        strncpy( dvdcss->psz_cachefile, psz_cache, PATH_MAX );
+        dvdcss->psz_cachefile[PATH_MAX - 1] = '\0';
+    }
 
     /* Check that there is enough space for the cache directory path and the
      * block filename. The +1s are path separators. */
@@ -297,10 +312,10 @@ static int init_cache_dir( dvdcss_t dvdcss )
     char psz_tagfile[PATH_MAX];
     int i_fd, i_ret;
 
-    i_ret = mkdir( dvdcss->psz_cachefile, 0755 );
+    i_ret = exists_or_mkdir( dvdcss->psz_cachefile, 0755 );
     if( i_ret < 0 && errno != EEXIST )
     {
-        print_error( dvdcss, "failed creating cache directory" );
+        print_error( dvdcss, "failed creating cache directory '%s'", dvdcss->psz_cachefile );
         dvdcss->psz_cachefile[0] = '\0';
         return -1;
     }
@@ -418,9 +433,10 @@ static void create_cache_subdir( dvdcss_t dvdcss )
     }
 
     /* We have a disc name or ID, we can create the cache subdirectory. */
-    i = sprintf( dvdcss->psz_cachefile, "%s/%s-%s-%s",
-                 dvdcss->psz_cachefile, psz_title, psz_serial, psz_key );
-    i_ret = mkdir( dvdcss->psz_cachefile, 0755 );
+    i = strlen( dvdcss->psz_cachefile );
+    i += sprintf( dvdcss->psz_cachefile + i, "/%s-%s-%s",
+                  psz_title, psz_serial, psz_key );
+    i_ret = exists_or_mkdir( dvdcss->psz_cachefile, 0755 );
     if( i_ret < 0 && errno != EEXIST )
     {
         print_error( dvdcss, "failed creating cache subdirectory" );
