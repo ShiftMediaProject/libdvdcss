@@ -211,7 +211,7 @@ void dvdcss_check_device ( dvdcss_t dvdcss )
         drives &= ~cur;
 
         sprintf( psz_device, "%c:\\", 'A' + i );
-        i_ret = GetDriveType( psz_device );
+        i_ret = GetDriveTypeA( psz_device );
         if( i_ret != DRIVE_CDROM )
         {
             continue;
@@ -469,14 +469,14 @@ static int win2k_open ( dvdcss_t dvdcss, const char *psz_device )
      * (See Microsoft Q241374: Read and Write Access Required for SCSI
      * Pass Through Requests) */
     dvdcss->i_fd = (int)
-                CreateFile( psz_dvd, GENERIC_READ | GENERIC_WRITE,
+                CreateFileA( psz_dvd, GENERIC_READ | GENERIC_WRITE,
                             FILE_SHARE_READ | FILE_SHARE_WRITE,
                             NULL, OPEN_EXISTING,
                             FILE_FLAG_RANDOM_ACCESS, NULL );
 
     if( (HANDLE) dvdcss->i_fd == INVALID_HANDLE_VALUE )
         dvdcss->i_fd = (int)
-                    CreateFile( psz_dvd, GENERIC_READ, FILE_SHARE_READ,
+                    CreateFileA( psz_dvd, GENERIC_READ, FILE_SHARE_READ,
                                 NULL, OPEN_EXISTING,
                                 FILE_FLAG_RANDOM_ACCESS, NULL );
 
