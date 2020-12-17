@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="..\src\common.h" />
+    <ClInclude Include="..\src\css.h" />
+    <ClInclude Include="..\src\csstables.h" />
+    <ClInclude Include="..\src\device.h" />
+    <ClInclude Include="..\src\dvdcss\dvdcss.h" />
+    <ClInclude Include="..\src\ioctl.h" />
+    <ClInclude Include="..\src\libdvdcss.h" />
+    <ClInclude Include="config.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\css.c" />
+    <ClCompile Include="..\src\device.c" />
+    <ClCompile Include="..\src\error.c" />
+    <ClCompile Include="..\src\ioctl.c" />
+    <ClCompile Include="..\src\libdvdcss.c" />
+  </ItemGroup>
+</Project>

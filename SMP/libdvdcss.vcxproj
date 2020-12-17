@@ -1,264 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="DebugDLL|Win32">
-      <Configuration>DebugDLL</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="DebugDLL|x64">
-      <Configuration>DebugDLL</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|x64">
-      <Configuration>Debug</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="ReleaseDLL|Win32">
-      <Configuration>ReleaseDLL</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="ReleaseDLL|x64">
-      <Configuration>ReleaseDLL</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="ReleaseLTO|Win32">
-      <Configuration>ReleaseLTO</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="ReleaseLTO|x64">
-      <Configuration>ReleaseLTO</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|x64">
-      <Configuration>Release</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\src\common.h" />
-    <ClInclude Include="..\src\css.h" />
-    <ClInclude Include="..\src\csstables.h" />
-    <ClInclude Include="..\src\device.h" />
-    <ClInclude Include="..\src\dvdcss\dvdcss.h" />
-    <ClInclude Include="..\src\ioctl.h" />
-    <ClInclude Include="..\src\libdvdcss.h" />
-    <ClInclude Include="config.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\src\css.c" />
-    <ClCompile Include="..\src\device.c" />
-    <ClCompile Include="..\src\error.c" />
-    <ClCompile Include="..\src\ioctl.c" />
-    <ClCompile Include="..\src\libdvdcss.c" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7C88BA5D-096F-4D9D-AC8C-20BA49A9CE33}</ProjectGuid>
-    <RootNamespace>libdvdcss</RootNamespace>
+    <RootNamespace>dvdcss</RootNamespace>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '15.0'">v141</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '15.0'">v141</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '15.0'">v141</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '15.0'">v141</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '15.0'">v141</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseLTO|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '15.0'">v141</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '15.0'">v141</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseLTO|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '15.0'">v141</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '15.0'">v141</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '15.0'">v141</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings">
+  <ImportGroup Label="PropertySheets">
+    <Import Project="smp.props" />
+    <Import Project="libdvdcss_files.props" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseLTO|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseLTO|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)..\..\..\msvc\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(Configuration)\$(Platform)\$(ProjectName)\</IntDir>
-    <TargetName>libdvdcssd</TargetName>
-    <CustomBuildAfterTargets>Clean</CustomBuildAfterTargets>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IntDir>$(SolutionDir)obj\$(Configuration)\$(Platform)\$(ProjectName)\</IntDir>
-    <TargetName>libdvdcssd</TargetName>
-    <OutDir>$(ProjectDir)..\..\..\msvc\</OutDir>
-    <CustomBuildAfterTargets>Clean</CustomBuildAfterTargets>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|Win32'">
-    <OutDir>$(ProjectDir)..\..\..\msvc\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(Configuration)\$(Platform)\$(ProjectName)\</IntDir>
-    <TargetName>dvdcssd</TargetName>
-    <CustomBuildAfterTargets>Clean</CustomBuildAfterTargets>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|x64'">
-    <IntDir>$(SolutionDir)obj\$(Configuration)\$(Platform)\$(ProjectName)\</IntDir>
-    <TargetName>dvdcssd</TargetName>
-    <OutDir>$(ProjectDir)..\..\..\msvc\</OutDir>
-    <CustomBuildAfterTargets>Clean</CustomBuildAfterTargets>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(ProjectDir)..\..\..\msvc\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(Configuration)\$(Platform)\$(ProjectName)\</IntDir>
-    <TargetName>libdvdcss</TargetName>
-    <CustomBuildAfterTargets>Clean</CustomBuildAfterTargets>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseLTO|Win32'">
-    <OutDir>$(ProjectDir)..\..\..\msvc\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(Configuration)\$(Platform)\$(ProjectName)\</IntDir>
-    <TargetName>libdvdcss</TargetName>
-    <CustomBuildAfterTargets>Clean</CustomBuildAfterTargets>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IntDir>$(SolutionDir)obj\$(Configuration)\$(Platform)\$(ProjectName)\</IntDir>
-    <TargetName>libdvdcss</TargetName>
-    <OutDir>$(ProjectDir)..\..\..\msvc\</OutDir>
-    <CustomBuildAfterTargets>Clean</CustomBuildAfterTargets>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseLTO|x64'">
-    <IntDir>$(SolutionDir)obj\$(Configuration)\$(Platform)\$(ProjectName)\</IntDir>
-    <TargetName>libdvdcss</TargetName>
-    <OutDir>$(ProjectDir)..\..\..\msvc\</OutDir>
-    <CustomBuildAfterTargets>Clean</CustomBuildAfterTargets>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|Win32'">
-    <OutDir>$(ProjectDir)..\..\..\msvc\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(Configuration)\$(Platform)\$(ProjectName)\</IntDir>
-    <TargetName>dvdcss</TargetName>
-    <CustomBuildAfterTargets>Clean</CustomBuildAfterTargets>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|x64'">
-    <IntDir>$(SolutionDir)obj\$(Configuration)\$(Platform)\$(ProjectName)\</IntDir>
-    <TargetName>dvdcss</TargetName>
-    <OutDir>$(ProjectDir)..\..\..\msvc\</OutDir>
-    <CustomBuildAfterTargets>Clean</CustomBuildAfterTargets>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0502;PATH_MAX=2048;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PATH_MAX=2048;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\;.\src\dvdcss;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996;4244;4311;4312;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <ProgramDataBaseFileName>$(OutDir)\lib\x86\$(TargetName).pdb</ProgramDataBaseFileName>
-      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-    <Lib>
-      <OutputFile>$(OutDir)\lib\x86\$(TargetName)$(TargetExt)</OutputFile>
-      <TargetMachine>MachineX86</TargetMachine>
-      <SubSystem>Windows</SubSystem>
-    </Lib>
     <PostBuildEvent>
       <Command>mkdir "$(OutDir)"\include
 mkdir "$(OutDir)"\include\dvdcss
@@ -292,23 +47,10 @@ del /f /q $(OutDir)\licenses\libdvdcss.txt
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0600;PATH_MAX=2048;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PATH_MAX=2048;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\;.\src\dvdcss;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996;4244;4311;4312;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <ProgramDataBaseFileName>$(OutDir)\lib\x64\$(TargetName).pdb</ProgramDataBaseFileName>
-      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-    <Lib>
-      <OutputFile>$(OutDir)\lib\x64\$(TargetName)$(TargetExt)</OutputFile>
-      <TargetMachine>MachineX64</TargetMachine>
-      <SubSystem>Windows</SubSystem>
-    </Lib>
     <PostBuildEvent>
       <Command>mkdir "$(OutDir)"\include
 mkdir "$(OutDir)"\include\dvdcss
@@ -342,28 +84,10 @@ del /f /q $(OutDir)\licenses\libdvdcss.txt
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0502;LIBDVDCSS_EXPORTS;PATH_MAX=2048;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LIBDVDCSS_EXPORTS;PATH_MAX=2048;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\;.\src\dvdcss;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <BufferSecurityCheck>true</BufferSecurityCheck>
       <DisableSpecificWarnings>4996;4244;4311;4312;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
-      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
-    <Link>
-      <OutputFile>$(OutDir)\bin\x86\$(TargetName)$(TargetExt)</OutputFile>
-      <ProgramDatabaseFile>$(OutDir)\lib\x86\$(TargetName).pdb</ProgramDatabaseFile>
-      <SubSystem>Windows</SubSystem>
-      <ImportLibrary>$(OutDir)\lib\x86\$(TargetName).lib</ImportLibrary>
-      <ProfileGuidedDatabase>$(IntDir)\$(TargetName).pgd</ProfileGuidedDatabase>
-      <ModuleDefinitionFile>
-      </ModuleDefinitionFile>
-      <LargeAddressAware>true</LargeAddressAware>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <MinimumRequiredVersion>5.1</MinimumRequiredVersion>
-    </Link>
     <PostBuildEvent>
       <Command>mkdir "$(OutDir)"\include
 mkdir "$(OutDir)"\include\dvdcss
@@ -397,26 +121,10 @@ del /f /q $(OutDir)\licenses\libdvdcss.txt
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0600;LIBDVDCSS_EXPORTS;PATH_MAX=2048;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LIBDVDCSS_EXPORTS;PATH_MAX=2048;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\;.\src\dvdcss;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996;4244;4311;4312;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
-      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
-    <Link>
-      <OutputFile>$(OutDir)\bin\x64\$(TargetName)$(TargetExt)</OutputFile>
-      <ProgramDatabaseFile>$(OutDir)\lib\x64\$(TargetName).pdb</ProgramDatabaseFile>
-      <SubSystem>Windows</SubSystem>
-      <ImportLibrary>$(OutDir)\lib\x64\$(TargetName).lib</ImportLibrary>
-      <ProfileGuidedDatabase>$(IntDir)\$(TargetName).pgd</ProfileGuidedDatabase>
-      <ModuleDefinitionFile>
-      </ModuleDefinitionFile>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <MinimumRequiredVersion>6.0</MinimumRequiredVersion>
-    </Link>
     <PostBuildEvent>
       <Command>mkdir "$(OutDir)"\include
 mkdir "$(OutDir)"\include\dvdcss
@@ -450,91 +158,10 @@ del /f /q $(OutDir)\licenses\libdvdcss.txt
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <OmitFramePointers>true</OmitFramePointers>
-      <StringPooling>true</StringPooling>
-      <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0502;PATH_MAX=2048;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PATH_MAX=2048;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\;.\src\dvdcss;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996;4244;4311;4312;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <InterproceduralOptimization>SingleFile</InterproceduralOptimization>
-      <ProgramDataBaseFileName>$(OutDir)\lib\x86\$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
-    <Lib>
-      <OutputFile>$(OutDir)\lib\x86\$(TargetName)$(TargetExt)</OutputFile>
-      <TargetMachine>MachineX86</TargetMachine>
-      <SubSystem>Windows</SubSystem>
-    </Lib>
-    <PostBuildEvent>
-      <Command>mkdir "$(OutDir)"\include
-mkdir "$(OutDir)"\include\dvdcss
-copy ..\src\dvdcss\dvdcss.h "$(OutDir)"\include\dvdcss
-copy .\src\dvdcss\version.h "$(OutDir)"\include\dvdcss
-mkdir $(OutDir)\licenses
-copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
-    </PostBuildEvent>
-    <PreBuildEvent>
-      <Command>if exist ..\config.h (
-del ..\config.h
-)
-if exist "$(OutDir)"\include\dvdcss (
-rd /s /q "$(OutDir)"\include\dvdcss
-cd ../
-cd $(ProjectDir)
-)</Command>
-    </PreBuildEvent>
-    <CustomBuildStep>
-      <Message>Custom Clean Step</Message>
-    </CustomBuildStep>
-    <CustomBuildStep>
-      <Outputs>force_clean</Outputs>
-      <Command>if exist "$(OutDir)"\include\dvdcss (
-rmdir /s /q "$(OutDir)"\include\dvdcss
-)
-if exist $(OutDir)\licenses\libdvdcss.txt (
-del /f /q $(OutDir)\licenses\libdvdcss.txt
-)</Command>
-    </CustomBuildStep>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseLTO|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <OmitFramePointers>true</OmitFramePointers>
-      <StringPooling>true</StringPooling>
-      <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0502;PATH_MAX=2048;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\;.\src\dvdcss;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings>4996;4244;4311;4312;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <InterproceduralOptimization>SingleFile</InterproceduralOptimization>
-      <ProgramDataBaseFileName>$(OutDir)\lib\x86\$(TargetName).pdb</ProgramDataBaseFileName>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
-    <Lib>
-      <OutputFile>$(OutDir)\lib\x86\$(TargetName)$(TargetExt)</OutputFile>
-      <TargetMachine>MachineX86</TargetMachine>
-      <SubSystem>Windows</SubSystem>
-    </Lib>
     <PostBuildEvent>
       <Command>mkdir "$(OutDir)"\include
 mkdir "$(OutDir)"\include\dvdcss
@@ -568,91 +195,10 @@ del /f /q $(OutDir)\licenses\libdvdcss.txt
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <OmitFramePointers>true</OmitFramePointers>
-      <StringPooling>true</StringPooling>
-      <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0600;PATH_MAX=2048;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PATH_MAX=2048;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\;.\src\dvdcss;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996;4244;4311;4312;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <InterproceduralOptimization>SingleFile</InterproceduralOptimization>
-      <ProgramDataBaseFileName>$(OutDir)\lib\x64\$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
-    <Lib>
-      <OutputFile>$(OutDir)\lib\x64\$(TargetName)$(TargetExt)</OutputFile>
-      <TargetMachine>MachineX64</TargetMachine>
-      <SubSystem>Windows</SubSystem>
-    </Lib>
-    <PostBuildEvent>
-      <Command>mkdir "$(OutDir)"\include
-mkdir "$(OutDir)"\include\dvdcss
-copy ..\src\dvdcss\dvdcss.h "$(OutDir)"\include\dvdcss
-copy .\src\dvdcss\version.h "$(OutDir)"\include\dvdcss
-mkdir $(OutDir)\licenses
-copy ..\COPYING $(OutDir)\licenses\libdvdcss.txt</Command>
-    </PostBuildEvent>
-    <PreBuildEvent>
-      <Command>if exist ..\config.h (
-del ..\config.h
-)
-if exist "$(OutDir)"\include\dvdcss (
-rd /s /q "$(OutDir)"\include\dvdcss
-cd ../
-cd $(ProjectDir)
-)</Command>
-    </PreBuildEvent>
-    <CustomBuildStep>
-      <Message>Custom Clean Step</Message>
-    </CustomBuildStep>
-    <CustomBuildStep>
-      <Outputs>force_clean</Outputs>
-      <Command>if exist "$(OutDir)"\include\dvdcss (
-rmdir /s /q "$(OutDir)"\include\dvdcss
-)
-if exist $(OutDir)\licenses\libdvdcss.txt (
-del /f /q $(OutDir)\licenses\libdvdcss.txt
-)</Command>
-    </CustomBuildStep>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseLTO|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <OmitFramePointers>true</OmitFramePointers>
-      <StringPooling>true</StringPooling>
-      <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0600;PATH_MAX=2048;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\;.\src\dvdcss;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings>4996;4244;4311;4312;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <InterproceduralOptimization>SingleFile</InterproceduralOptimization>
-      <ProgramDataBaseFileName>$(OutDir)\lib\x64\$(TargetName).pdb</ProgramDataBaseFileName>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
-    <Lib>
-      <OutputFile>$(OutDir)\lib\x64\$(TargetName)$(TargetExt)</OutputFile>
-      <TargetMachine>MachineX64</TargetMachine>
-      <SubSystem>Windows</SubSystem>
-    </Lib>
     <PostBuildEvent>
       <Command>mkdir "$(OutDir)"\include
 mkdir "$(OutDir)"\include\dvdcss
@@ -686,35 +232,10 @@ del /f /q $(OutDir)\licenses\libdvdcss.txt
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <OmitFramePointers>true</OmitFramePointers>
-      <StringPooling>true</StringPooling>
-      <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0502;LIBDVDCSS_EXPORTS;PATH_MAX=2048;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LIBDVDCSS_EXPORTS;PATH_MAX=2048;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\;.\src\dvdcss;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996;4244;4311;4312;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
-    <Link>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <OutputFile>$(OutDir)\bin\x86\$(TargetName)$(TargetExt)</OutputFile>
-      <ProgramDatabaseFile>$(OutDir)\lib\x86\$(TargetName).pdb</ProgramDatabaseFile>
-      <SubSystem>Windows</SubSystem>
-      <ImportLibrary>$(OutDir)\lib\x86\$(TargetName).lib</ImportLibrary>
-      <ProfileGuidedDatabase>$(IntDir)\$(TargetName).pgd</ProfileGuidedDatabase>
-      <ModuleDefinitionFile>
-      </ModuleDefinitionFile>
-      <LargeAddressAware>true</LargeAddressAware>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <MinimumRequiredVersion>5.1</MinimumRequiredVersion>
-    </Link>
     <PostBuildEvent>
       <Command>mkdir "$(OutDir)"\include
 mkdir "$(OutDir)"\include\dvdcss
@@ -748,34 +269,10 @@ del /f /q $(OutDir)\licenses\libdvdcss.txt
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <OmitFramePointers>true</OmitFramePointers>
-      <StringPooling>true</StringPooling>
-      <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0600;LIBDVDCSS_EXPORTS;PATH_MAX=2048;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LIBDVDCSS_EXPORTS;PATH_MAX=2048;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\;.\src\dvdcss;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996;4244;4311;4312;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
-    <Link>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <OutputFile>$(OutDir)\bin\x64\$(TargetName)$(TargetExt)</OutputFile>
-      <ProgramDatabaseFile>$(OutDir)\lib\x64\$(TargetName).pdb</ProgramDatabaseFile>
-      <SubSystem>Windows</SubSystem>
-      <ImportLibrary>$(OutDir)\lib\x64\$(TargetName).lib</ImportLibrary>
-      <ProfileGuidedDatabase>$(IntDir)\$(TargetName).pgd</ProfileGuidedDatabase>
-      <ModuleDefinitionFile>
-      </ModuleDefinitionFile>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <MinimumRequiredVersion>6.0</MinimumRequiredVersion>
-    </Link>
     <PostBuildEvent>
       <Command>mkdir "$(OutDir)"\include
 mkdir "$(OutDir)"\include\dvdcss
@@ -807,7 +304,4 @@ del /f /q $(OutDir)\licenses\libdvdcss.txt
 )</Command>
     </CustomBuildStep>
   </ItemDefinitionGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
 </Project>
