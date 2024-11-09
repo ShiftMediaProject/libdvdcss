@@ -16,5 +16,12 @@
     <ClCompile Include="..\src\error.c" />
     <ClCompile Include="..\src\ioctl.c" />
     <ClCompile Include="..\src\libdvdcss.c" />
+    <ClCompile Include="..\msvc\uwpapi.cpp">
+      <CompileAsWinRT>true</CompileAsWinRT>
+      <ExcludedFromBuild Condition="'$(Configuration)'=='Debug'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)'=='ReleaseDLL'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)'=='DebugDLL'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
 </Project>
